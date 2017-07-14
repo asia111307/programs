@@ -1,0 +1,135 @@
+# -*- coding: cp1250 -*-
+# gracz odgaduje s³owo z podanych liter
+# co mozna zrobic: dodac podpowiedzi (minus unkty), podzial na kategorie, rearanazacja liter
+
+import time
+import random
+import os
+
+WORDS = ("python", "anagram", "³atwy", "skomplikowany", "odpowiedŸ", "ksylofon", "klamerka", "ziemniaki", "szampon",
+             "kompot", "przypadek", "pies", "chmurka", "programowanie")
+used_words = []  # lista wylowowanych ju¿ w grze s³ów, ¿eby nie losowa³o tych samych ponownie do odgadniêcia
+points = 0  # liczba zdobytych punktów w ca³ej grze
+amount = 0  # liczba wszystkich wyœwietlonych s³ów do odgadniêcia
+
+def begin():
+    """ powitanie """
+    print(u"\n\t\t*** GRA W ZGADYWANIE S£ÓW ***\n")
+    time.sleep(1)
+    print("Witaj!")
+    time.sleep(1)
+    print(u"\nZagrajmy w grê.")
+    time.sleep(2)
+    print(u"Ja pokazujê Ci ci¹g liter, a Ty próbujesz u³o¿yæ z nich s³owo.")
+    time.sleep(2)
+    print(u"Za ka¿de dobrze odgadniête s³owo otrzymujesz jeden punkt.\nMasz piêæ szans na odgadniêcie jednego s³owa, w przeciwnym razie nie otrzymasz punktu.")
+    time.sleep(2)
+    print(u"Jesteœ gotowy?")
+    time.sleep(2)
+    print(u"Aby rozpocz¹æ grê, wciœnij dowolny klawisz.")
+    print(u"Aby siê poddaæ lub zrezygnowaæ, wciœnij q.")
+    key = input(u"Twoja decyzja: ")
+    if key.lower() == 'q':
+        end_game()
+    return key
+
+
+def end_game():
+    """ koniec gry + podsumowanie """
+    time.sleep(1)
+    os.system('cls')
+    print(u"\nGra zosta³a zakoñczona.")
+    print(u"Liczba wszystkich s³ów do odgadniêcia: " + str(amount))
+    print(u"Liczba zdobytych punktów: " + str(points))
+    print(u"Dziêkujemy za udzia³ w grze.")
+    input("Aby wyjœæ z programu, wciœnij Enter.")
+
+
+def next_exmpl():
+    """ przejœcie do nastêpnego przyk³adu + bie¿¹ce podsumowanie """
+    print(u"\nCzy przejœæ do nastêpnego przyk³adu? Jeœli tak, wciœnij dowolny klawisz. Jeœli chcesz zakoñczyæ grê, wciœnij q.")
+    print(u"Liczba wszystkich s³ów do odgadniêcia: " + str(amount))
+    print(u"Dotychczas zdobyte punkty: " + str(points))
+    key = input()
+    if key.lower() == 'q':
+        end_game()
+    return key
+
+
+def bad_answer(used_guess):
+    """ podanie z³ej odpowiedzi + sprawdzenie """
+    print(u"\aNiestety, ale to b³êdna odpowiedŸ. Spróbuj jeszcze raz!")
+    answer = input(u"Zgadnij, co to za s³owo: ")
+    while answer in used_guess:
+        print(u"Ju¿ podawa³eœ tê literê. Podaj inn¹.")
+        answer = input("Podaj literê: ")
+    return answer
+
+
+def new_word(word):
+    """ tworzenie anagramu z wylosowanego s³owa z puli """
+    anagram = ""
+    while word:
+        pos = random.randrange(len(word))
+        anagram += word[pos].upper() + " "
+        word = word[:pos] + word[(pos+1):]
+    print("\t\t" + str(anagram))
+    return anagram
+
+
+def brawo(correct):
+    global points
+    print(u"\nBRAWO! To w³aœnie s³owo '" + str(correct.upper()) + "'.")
+    points += 1
+    key = next_exmpl()
+    os.system('cls')
+    return key
+
+
+def main():
+    key = begin()
+    while key.lower() != 'q':
+        if len(used_words) == len(WORDS): # wszystkie s³owa z puli sa w liœcie wykorzystanych
+            time.sleep(1)
+            print(u"\aWygl¹da na to, ¿e zaprezentowaliœmy Ci wszystkie s³owa z naszej puli.")
+            time.sleep(1)
+            end_game()
+            break
+        used_guess = []
+        os.system('cls')
+        time.sleep(1)
+        print(u"\nZgadnij, co to za s³owo: \n")
+        while True:
+            word = random.choice(WORDS)
+            if word in used_words:
+                continue
+            else:
+                used_words.append(word)
+                break
+        correct = word # przechwycenie s³owa przed zmian¹ go w anagram
+        new_word(word)
+        answer = input(u"\nJakie to s³owo?\n  ")
+        used_guess.append(answer)
+        global amount
+        amount += 1
+        tries = 1
+        while True:
+            if answer.lower() == correct.lower():
+                key = brawo(correct)
+                break
+            while answer.lower() != correct.lower():
+                answer = bad_answer(used_guess)
+                used_guess.append(answer)
+                tries += 1
+                if tries <= 5 and answer.lower() == correct.lower():
+                    key = brawo(correct)
+                    break
+                if tries == 5:
+                    print(u"\aNiestety nie zgad³eœ! To s³owo to '" + str(correct.upper()) + "'.")
+                    print(u"Nie otrzymujesz punktu za to s³owo.")
+                    key = next_exmpl()
+                    os.system('cls')
+                    break
+            break
+main()
+
