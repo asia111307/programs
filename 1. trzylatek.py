@@ -2,12 +2,7 @@
 # gracz tak długo wpisuje odpowedź na pytanie trzylatka, aż nie wpisze poprawnej
 
 import time
-from distutils.core import setup
-import py2exe
-setup(
-    version = "1.0",
-    console = ["skrypt.py"],
-    )
+
 
 def begin():
     time.sleep(1)
