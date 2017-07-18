@@ -1,7 +1,7 @@
-# -*- coding: cp1250 -*-
-# gra w wojnê - ten kto wygrywa rundê, zabiera wszystkie karty z rundy do swojej talii
-# gracze otrzymuj¹ po 1 karcie, wygrywa ten z najwy¿sz¹ kart¹
-# jesli jest remis, to karty z rundy przechodz¹ do "poczekalni" i zgarnia je gracz, który wygra nastêpn¹ rundê
+# -*- coding: utf-8 -*-
+# gra w wojnÃª - ten kto wygrywa rundÃª, zabiera wszystkie karty z rundy do swojej talii
+# gracze otrzymujÂ¹ po 1 karcie, wygrywa ten z najwyÂ¿szÂ¹ kartÂ¹
+# jesli jest remis, to karty z rundy przechodzÂ¹ do "poczekalni" i zgarnia je gracz, ktÃ³ry wygra nastÃªpnÂ¹ rundÃª
 
 import random
 import time
@@ -38,7 +38,7 @@ class Card(object):
 
 
 class PlayerHand(object):
-    """ Gracz i to, to co trzyma w rêce """
+    """ Gracz i to, to co trzyma w rÃªce """
     def __init__(self, name):
         self.cards = []
         self.name = name
@@ -80,7 +80,7 @@ class Deck(PlayerHand):
         return x
 
     def populate(self):
-        """ zape³nienie talii """
+        """ zapeÂ³nienie talii """
         for i in Card.RANKS:
             for x in Card.SUITS:
                 card = Card(i, x)
@@ -156,7 +156,7 @@ class Game(object):
                         self.deck.rest_cards.append(player.cards[0])
                         player.cards.remove(player.cards[0])
             elif total_values.count(max_value) == 1:
-                print("\nTê rundê wygrywa gracz " + str(self.players[max_player_index].name) + "!\n")
+                print("\nTÃª rundÃª wygrywa gracz " + str(self.players[max_player_index].name) + "!\n")
                 for player in self.players:
                     if not player.is_playing():
                         continue
@@ -178,9 +178,9 @@ class Game(object):
             winner = self.players[player]
             winners.append(winner)
         if len(winners) == 0:
-            print("\nNikt nie wygra³")
+            print("\nNikt nie wygraÂ³")
         elif len(winners) == 1:
-            print("\nMamy zwyciêzcê! Jest nim gracz " + str(winners[0]) + ".")
+            print("\nMamy zwyciÃªzcÃª! Jest nim gracz " + str(winners[0]) + ".")
         time.sleep(1)
 
 
@@ -188,17 +188,17 @@ def main():
     again = ""
     while again.lower() != 'q':
         time.sleep(1)
-        print("\nRozpoczynamy grê w Wojnê!\n")
+        print("\nRozpoczynamy grÃª w WojnÃª!\n")
         time.sleep(1)
         while True:
             try:
-                number_players = int(input("WprowadŸ liczbê graczy: "))
+                number_players = int(input("WprowadÅ¸ liczbÃª graczy: "))
                 break
             except (ValueError, TypeError):
-                print("Wprowadzono nieprawid³ow¹ wartoœæ.")
+                print("Wprowadzono nieprawidÂ³owÂ¹ wartoÅ“Ã¦.")
         names = []
         for i in range(number_players):
-            name = input("Poda imiê " + str(i+1) + " gracza: ")
+            name = input("Poda imiÃª " + str(i+1) + " gracza: ")
             names.append(name.capitalize())
         game = Game(names)
         Game.EMPTY = False
@@ -208,9 +208,9 @@ def main():
                 game.end()
                 break
         time.sleep(1)
-        again = input("\nCzy chcesz zagraæ jeszcze raz? ")
+        again = input("\nCzy chcesz zagraÃ¦ jeszcze raz? ")
 
 
 main()
 time.sleep(1)
-input("Aby zakoñczyæ grê, wciœnij Enter.")
+input("Aby zakoÃ±czyÃ¦ grÃª, wciÅ“nij Enter.")
