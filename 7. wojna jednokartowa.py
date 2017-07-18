@@ -1,6 +1,6 @@
-# -*- coding: cp1250 -*-
-# jednokartowa gra w wojnê
-# gracze otrzymuj¹ po 1 karcie, wygrywa ten z najwy¿sz¹ kart¹
+# -*- coding: utf-8 -*-
+# jednokartowa gra w wojnÃª
+# gracze otrzymujÂ¹ po 1 karcie, wygrywa ten z najwyÂ¿szÂ¹ kartÂ¹
 
 import random
 import time
@@ -37,7 +37,7 @@ class Card(object):
 
 
 class PlayerHand(object):
-    """ Gracz i to, to co trzyma w rêce """
+    """ Gracz i to, to co trzyma w rÃªce """
     def __init__(self, name):
         self.cards = []
         self.name = name
@@ -67,7 +67,7 @@ class PlayerHand(object):
 class Deck(PlayerHand):
     """ talia kart """
     def populate(self):
-        """ zape³nienie talii """
+        """ zapeÂ³nienie talii """
         for i in Card.RANKS:
             for x in Card.SUITS:
                 card = Card(i, x)
@@ -84,7 +84,7 @@ class Deck(PlayerHand):
                     top_card = self.cards[0]
                     self.give(top_card, hand)
         elif len(self.cards) <= len(hands):
-            print("W talii nie ma wystarczaj¹cej liczby kart!")
+            print("W talii nie ma wystarczajÂ¹cej liczby kart!")
             Game.EMPTY = True
 
 
@@ -121,7 +121,7 @@ class Game(object):
             if total_values.count(max_value) > 1:
                 print("\nMamy remis!")
             else:
-                print("\nTê rundê wygrywa gracz " + str(self.players[max_player_index].name) + "!")
+                print("\nTÃª rundÃª wygrywa gracz " + str(self.players[max_player_index].name) + "!")
                 self.players[max_player_index].points += 1
             for player in self.players:
                 player.clear()
@@ -135,10 +135,10 @@ class Game(object):
         amount_win = points.count(win_points)
         time.sleep(1)
         if win_points == 0:
-            print("\nNikt nie wygra³!")
+            print("\nNikt nie wygraÂ³!")
         elif amount_win > 1:
             winners = []
-            print("\nMamy kilku zwyciêzców!")
+            print("\nMamy kilku zwyciÃªzcÃ³w!")
             for player in self.players:
                 if player.points == win_points:
                     winners.append(player.name)
@@ -148,7 +148,7 @@ class Game(object):
         elif amount_win == 1:
             winner_index = points.index(win_points)
             winner = self.players[winner_index].name
-            print("\nMamy zwyciêzcê! Jest nim gracz " + str(winner) + ".")
+            print("\nMamy zwyciÃªzcÃª! Jest nim gracz " + str(winner) + ".")
         time.sleep(1)
         print("\nPunkty uzyskane przez wszystkich graczy: ")
         for player in self.players:
@@ -159,17 +159,17 @@ def main():
     again = ""
     while again.lower() != 'q':
         time.sleep(1)
-        print("\nRozpoczynamy grê w Wojnê!\n")
+        print("\nRozpoczynamy grÃª w WojnÃª!\n")
         time.sleep(1)
         while True:
             try:
-                number_players = int(input("WprowadŸ liczbê graczy: "))
+                number_players = int(input("WprowadÅ¸ liczbÃª graczy: "))
                 break
             except (ValueError, TypeError):
-                print("Wprowadzono nieprawid³ow¹ wartoœæ.")
+                print("Wprowadzono nieprawidÂ³owÂ¹ wartoÅ“Ã¦.")
         names = []
         for i in range(number_players):
-            name = input("Poda imiê " + str(i+1) + " gracza: ")
+            name = input("Poda imiÃª " + str(i+1) + " gracza: ")
             names.append(name.capitalize())
         game = Game(names)
         Game.EMPTY = False
@@ -179,9 +179,9 @@ def main():
                 game.end()
                 break
         time.sleep(1)
-        again = input("\nCzy chcesz zagraæ jeszcze raz? ")
+        again = input("\nCzy chcesz zagraÃ¦ jeszcze raz? ")
 
 
 main()
 time.sleep(1)
-input("Aby zakoñczyæ grê, wciœnij Enter.")
+input("Aby zakoÃ±czyÃ¦ grÃª, wciÅ“nij Enter.")
