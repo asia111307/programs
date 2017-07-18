@@ -1,4 +1,4 @@
-# -*- coding : cp1250 -*-
+# -*- coding : utf-8 -*-
 # gracz tak długo wpisuje odpowedź na pytanie trzylatka, aż nie wpisze poprawnej
 
 import time
