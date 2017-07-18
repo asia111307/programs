@@ -156,7 +156,7 @@ class Game(object):
                         self.deck.rest_cards.append(player.cards[0])
                         player.cards.remove(player.cards[0])
             elif total_values.count(max_value) == 1:
-                print("\nTê rundê wygrywa gracz " + str(self.players[max_player_index].name) + "!\n")
+                print("\nTę rundę wygrywa gracz " + str(self.players[max_player_index].name) + "!\n")
                 for player in self.players:
                     if not player.is_playing():
                         continue
@@ -178,9 +178,9 @@ class Game(object):
             winner = self.players[player]
             winners.append(winner)
         if len(winners) == 0:
-            print("\nNikt nie wygra³")
+            print("\nNikt nie wygrał")
         elif len(winners) == 1:
-            print("\nMamy zwyciêzcê! Jest nim gracz " + str(winners[0]) + ".")
+            print("\nMamy zwycięzcę! Jest nim gracz " + str(winners[0]) + ".")
         time.sleep(1)
 
 
@@ -188,17 +188,17 @@ def main():
     again = ""
     while again.lower() != 'q':
         time.sleep(1)
-        print("\nRozpoczynamy grê w Wojnê!\n")
+        print("\nRozpoczynamy grę w Wojnę!\n")
         time.sleep(1)
         while True:
             try:
-                number_players = int(input("WprowadŸ liczbê graczy: "))
+                number_players = int(input("Wprowadź liczbę graczy: "))
                 break
             except (ValueError, TypeError):
-                print("Wprowadzono nieprawid³ow¹ wartoœæ.")
+                print("Wprowadzono nieprawidłową wartość.")
         names = []
         for i in range(number_players):
-            name = input("Poda imiê " + str(i+1) + " gracza: ")
+            name = input("Podaj imię " + str(i+1) + " gracza: ")
             names.append(name.capitalize())
         game = Game(names)
         Game.EMPTY = False
@@ -208,9 +208,9 @@ def main():
                 game.end()
                 break
         time.sleep(1)
-        again = input("\nCzy chcesz zagraæ jeszcze raz? ")
+        again = input("\nCzy chcesz zagrać jeszcze raz? ")
 
 
 main()
 time.sleep(1)
-input("Aby zakoñczyæ grê, wciœnij Enter.")
+input("Aby zakończyæ grę, wciśnij Enter.")

@@ -6,7 +6,7 @@ import time
 import os
 
 amount = 0 # liczba wszystkich rozgrywek
-won_h = 0 # liczba rozgrywek wygranych przez cz³owieka
+won_h = 0 # liczba rozgrywek wygranych przez człowieka
 won_c = 0 # liczba rozgrywek wygranych przez komputer
 ties = 0 # liczba remisów
 X = 'X' # reprezentacja ¿etonu X
@@ -18,19 +18,19 @@ NUM_SQ = 9 # liczba pól planszy
 
 def begin():
     """ powitanie """
-    print(u"\n\t\t*** KÓ£KO I KRZY¯YK ***\n")
+    print("\n\t\t*** KÓŁKO I KRZYŻYK ***\n")
     time.sleep(1)
     print("\nWitaj!")
     time.sleep(1)
-    print(u"\nZagrajmy w grê.")
+    print("\nZagrajmy w grę.")
     time.sleep(2)
-    print(u"Zobaczymy, czy jesteœ lepszy od komputera w 'Kó³ko i Krzy¿yk'.")
+    print("Zobaczymy, czy jesteś lepszy od komputera w 'Kółko i Krzyżyk'.")
     time.sleep(2)
-    print(u"Jesteœ gotowy?")
+    print("Jesteś gotowy?")
     time.sleep(2)
-    print(u"Aby rozpocz¹æ grê, wciœnij dowolny klawisz.")
-    print(u"Aby siê poddaæ lub zrezygnowaæ, wciœnij q.")
-    key = input(u"Twoja decyzja: ")
+    print("Aby rozpocząć grę, wciśnij dowolny klawisz.")
+    print("Aby się poddać lub zrezygnować, wciśnij q.")
+    key = input("Twoja decyzja: ")
     if key.lower() == 'q':
         end_game()
     else:
@@ -40,11 +40,11 @@ def begin():
 
 def next_exmpl():
     """ przejœcie do nastêpnej rozgrywki + bie¿¹ce podsumowanie """
-    print(u"\nCzy przejœæ do nastêpnego przyk³adu? Jeœli tak, wciœnij dowolny klawisz. Jeœli chcesz zakoñczyæ grê, wciœnij q.")
-    print(u"Liczba wszystkich rozgrywek: " + str(amount))
-    print(u"Liczba wygranych rozgrywek: " + str(won_h))
-    print(u"Liczba przegranych rozgrywek: " + str(won_c))
-    print(u"Liczba nierozstrzygniêtych rozgrywek: " + str(ties))
+    print("\nCzy przejść do następnego przykładu? Jeśli tak, wciśnij dowolny klawisz. Jeśli chcesz zakończyć grę, wciśnij q.")
+    print("Liczba wszystkich rozgrywek: " + str(amount))
+    print("Liczba wygranych rozgrywek: " + str(won_h))
+    print("Liczba przegranych rozgrywek: " + str(won_c))
+    print("Liczba nierozstrzygniętych rozgrywek: " + str(ties))
     key = input("Twoja decyzja: ")
     if key.lower() == 'q':
         end_game()
@@ -55,26 +55,26 @@ def end_game():
     """ koniec gry + podsumowanie """
     time.sleep(1)
     os.system('cls')
-    print(u"\nGra zosta³a zakoñczona.")
-    print(u"Liczba wszystkich rozgrywek: " + str(amount))
-    print(u"Liczba wygranych rozgrywek: " + str(won_h))
-    print(u"Liczba przegranych rozgrywek: " + str(won_c))
-    print(u"Liczba nierozstrzygniêtych rozgrywek: " + str(ties))
-    print(u"Dziêkujemy za udzia³ w grze.")
-    input("Aby wyjœæ z programu, wciœnij Enter.")
+    print("\nGra została zakończona.")
+    print("Liczba wszystkich rozgrywek: " + str(amount))
+    print("Liczba wygranych rozgrywek: " + str(won_h))
+    print("Liczba przegranych rozgrywek: " + str(won_c))
+    print("Liczba nierozstrzygniętych rozgrywek: " + str(ties))
+    print("Dziękujemy za udział w grze.")
+    input("Aby wyjść z programu, wciśnij Enter.")
 
 
 def instructions():
     """ instrukcja """
     os.system('cls')
     time.sleep(1)
-    print(u"\nA wiêc zaczynajmy!")
+    print("\nA więc zaczynajmy!")
     time.sleep(1)
-    print("\nPozwól, ¿e przedstawiê Ci instrukcjê gry.")
+    print("\nPozwól, że przedstawię Ci instrukcję gry.")
     time.sleep(1)
-    print(u"Aby wygraæ rundê, musisz ustawiæ trzy swoje ¿etony (X lub O) w rzêdzie: pionowo, poziomo lub po przek¹tnej.")
+    print("Aby wygrać rundę, musisz ustawić trzy swoje żetony (X lub O) w rzędzie: pionowo, poziomo lub po przekątnej.")
     time.sleep(3)
-    print(u"Do dyspozycji masz planszê z dziewiêcioma polami, ponumerowanymi w sposób przedstawiony poni¿ej:\n")
+    print("Do dyspozycji masz planszę z dziewięcioma polami, ponumerowanymi w sposób przedstawiony poniżej:\n")
     time.sleep(2)
     print("""
                         0 | 1 | 2
@@ -84,11 +84,11 @@ def instructions():
                         6 | 7 | 8
     """)
     time.sleep(1)
-    print(u"\nRuchy wykonujemy na zmianê, wprowadzaj¹c numer pola, na które chcemy postawiæ swój ¿eton (o ile pole nie jest ju¿ zajête).")
+    print("\nRuchy wykonujemy na zmianę, wprowadzając numer pola, na które chcemy postawiæ swój żeton (o ile pole nie jest już zajęte).")
     time.sleep(1)
-    print(u"Grê zawsze rozpoczyna gracz z ¿etonem X.")
+    print("Grę zawsze rozpoczyna gracz z żetonem X.")
     time.sleep(1)
-    input(u"Jeœli jesteœ gotowy zacz¹æ rozgrywkê, wciœnij Enter.")
+    input("Jeśli jesteś gotowy zacząć rozgrywkę, wciśnij Enter.")
     time.sleep(1)
 
 
@@ -96,18 +96,18 @@ def first_move():
     """ ustala, kto rozpoczyna grê """
     os.system('cls')
     time.sleep(1)
-    response = input(u"\nCzy chcesz wykonaæ ruch jako pierwszy?\nJeœli tak, wpisz 't', a jeœli nie, wpisz 'n'(wtedy rozgrywkê zacznie komputer)")
+    response = input(u"\nCzy chcesz wykonać ruch jako pierwszy?\nJeśli tak, wpisz 't', a jeśli nie, wpisz 'n'(wtedy rozgrywkę zacznie komputer)")
     while response.lower() not in ("t", "n"):
-        print("\nNie rozumiem, co masz na myœli. Odpowiedz jeszcze raz.")
+        print("\nNie rozumiem, co masz na myśli. Odpowiedz jeszcze raz.")
         response = input()
     if response.lower() == 't':
         time.sleep(1)
-        print(u"\nDobrze. Twój ¿eton to X. Rozpoczynasz grê.")
+        print(u"\nDobrze. Twój żeton to X. Rozpoczynasz grę.")
         human = X
         computer = O
     elif response.lower() == 'n':
         time.sleep(1)
-        print(u"\nDobrze. Twój ¿eton to O. Grê rozpoczyna Komputer.")
+        print(u"\nDobrze. Twój żeton to O. Grę rozpoczyna Komputer.")
         human = O
         computer = X
     time.sleep(1)
@@ -147,12 +147,12 @@ def human_move(board):
     move = None
     while move not in poss_move:
         try:
-            move = int(input(u"\nPodaj pole, na które chcesz po³o¿yæ swój ¿eton: "))
+            move = int(input("\nPodaj pole, na które chcesz położyć swój żeton: "))
             if move not in poss_move:
-                print(u"\nTo pole jest ju¿ zajête. Wybierz inne.")
+                print("\nTo pole jest już zajęte. Wybierz inne.")
         except ValueError:
-            print("\nChyba wprowadzi³eœ nieprawid³ow¹ wartoœæ. Popraw siê.")
-    print(u"Wybra³eœ pole: "+ str(move))
+            print("\nChyba wprowadziłeś nieprawidłową wartość. Popraw się.")
+    print("Wybrałeś pole: "+ str(move))
     return move
 
 
@@ -212,13 +212,13 @@ def win_end(the_winner, human, computer):
     """ podsumowanie o zwyciêzcy """
     time.sleep(1)
     if the_winner != TIE:
-        print(u"\nMamy zwyciêzcê!")
+        print("\nMamy zwycięzcę!")
         if the_winner == human:
-            print(u"Gratulacje! Wygra³eœ tê rozgrywkê!")
+            print("Gratulacje! Wygrałeś tę rozgrywkę!")
             global won_h
             won_h += 1
         elif the_winner == computer:
-            print(u"Niestety, ale tê rozgrywkê wygra³ Komputer.")
+            print("Niestety, ale tę rozgrywkę wygrał Komputer.")
             global won_c
             won_c += 1
     else:

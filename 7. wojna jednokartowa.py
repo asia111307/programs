@@ -84,7 +84,7 @@ class Deck(PlayerHand):
                     top_card = self.cards[0]
                     self.give(top_card, hand)
         elif len(self.cards) <= len(hands):
-            print("W talii nie ma wystarczaj¹cej liczby kart!")
+            print("W talii nie ma wystarczającej liczby kart!")
             Game.EMPTY = True
 
 
@@ -121,7 +121,7 @@ class Game(object):
             if total_values.count(max_value) > 1:
                 print("\nMamy remis!")
             else:
-                print("\nTê rundê wygrywa gracz " + str(self.players[max_player_index].name) + "!")
+                print("\nTę rundę wygrywa gracz " + str(self.players[max_player_index].name) + "!")
                 self.players[max_player_index].points += 1
             for player in self.players:
                 player.clear()
@@ -138,7 +138,7 @@ class Game(object):
             print("\nNikt nie wygra³!")
         elif amount_win > 1:
             winners = []
-            print("\nMamy kilku zwyciêzców!")
+            print("\nMamy kilku zwycięzców!")
             for player in self.players:
                 if player.points == win_points:
                     winners.append(player.name)
@@ -148,7 +148,7 @@ class Game(object):
         elif amount_win == 1:
             winner_index = points.index(win_points)
             winner = self.players[winner_index].name
-            print("\nMamy zwyciêzcê! Jest nim gracz " + str(winner) + ".")
+            print("\nMamy zwycięzcę! Jest nim gracz " + str(winner) + ".")
         time.sleep(1)
         print("\nPunkty uzyskane przez wszystkich graczy: ")
         for player in self.players:
@@ -159,17 +159,17 @@ def main():
     again = ""
     while again.lower() != 'q':
         time.sleep(1)
-        print("\nRozpoczynamy grê w Wojnê!\n")
+        print("\nRozpoczynamy grę w Wojnę!\n")
         time.sleep(1)
         while True:
             try:
-                number_players = int(input("WprowadŸ liczbê graczy: "))
+                number_players = int(input("Wprowadź liczbę graczy: "))
                 break
             except (ValueError, TypeError):
-                print("Wprowadzono nieprawid³ow¹ wartoœæ.")
+                print("Wprowadzono nieprawidłową wartość.")
         names = []
         for i in range(number_players):
-            name = input("Poda imiê " + str(i+1) + " gracza: ")
+            name = input("Podaj imię " + str(i+1) + " gracza: ")
             names.append(name.capitalize())
         game = Game(names)
         Game.EMPTY = False
@@ -179,7 +179,7 @@ def main():
                 game.end()
                 break
         time.sleep(1)
-        again = input("\nCzy chcesz zagraæ jeszcze raz? ")
+        again = input("\nCzy chcesz zagrać jeszcze raz? ")
 
 
 main()
