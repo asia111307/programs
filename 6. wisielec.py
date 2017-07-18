@@ -1,4 +1,4 @@
-# -*- coding : cp1250 -*-
+# -*- coding : utf-8 -*-
 # gra wisielec
 # można dodać kategorie
 
