@@ -1,4 +1,4 @@
-# -*- coding : cp1250 -*-
+# -*- coding : utf-8 -*-
 # odwrócona gra w zgadywanie - teraz zgaduje komputer
 # user podaje liczbę, a komputer ją zgaduje. Dostaje 5 podpowiedzi od Usera
 # podpowiedzi Usera są generowane przez komputer
