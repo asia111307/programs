@@ -1,4 +1,4 @@
-# -*- coding : cp1250 -*-
+# -*- coding : utf-8 -*-
 # zgaduje liczbę od 1 do 100
 # uwzględnia to, że użytkownik wpisał zły znak zamiast liczby
 # użytkownik dostanie max 5 podpowiedzi
