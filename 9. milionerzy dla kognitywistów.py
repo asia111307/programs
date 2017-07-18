@@ -9,7 +9,6 @@ from colorama import init, Fore
 init()
 
 
-
 used_questions = []  # zbiór wykorzystanych już pytań
 # koła ratunkowe dostępne
 P = 1
