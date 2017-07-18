@@ -1,33 +1,33 @@
-# -*- coding: cp1250 -*-
-# gracz odgaduje s≥owo z podanych liter
+# -*- coding: utf-8 -*-
+# gracz odgaduje s≈Çowo z podanych liter
 # co mozna zrobic: dodac podpowiedzi (minus unkty), podzial na kategorie, rearanazacja liter
 
 import time
 import random
 import os
 
-WORDS = ("python", "anagram", "≥atwy", "skomplikowany", "odpowiedü", "ksylofon", "klamerka", "ziemniaki", "szampon",
+WORDS = ("python", "anagram", "≈Çatwy", "skomplikowany", "odpowied≈∫", "ksylofon", "klamerka", "ziemniaki", "szampon",
              "kompot", "przypadek", "pies", "chmurka", "programowanie")
-used_words = []  # lista wylowowanych juø w grze s≥Ûw, øeby nie losowa≥o tych samych ponownie do odgadniÍcia
-points = 0  # liczba zdobytych punktÛw w ca≥ej grze
-amount = 0  # liczba wszystkich wyúwietlonych s≥Ûw do odgadniÍcia
+used_words = []  # lista wylowowanych ju≈º w grze s≈Ç√≥w, ≈ºeby nie losowa≈Ço tych samych ponownie do odgadniƒôcia
+points = 0  # liczba zdobytych punkt√≥w w ca≈Çej grze
+amount = 0  # liczba wszystkich wy≈õwietlonych s≈Ç√≥w do odgadniƒôcia
 
 def begin():
     """ powitanie """
-    print(u"\n\t\t*** GRA W ZGADYWANIE S£”W ***\n")
+    print(u"\n\t\t*** GRA W ZGADYWANIE S≈Å√ìW ***\n")
     time.sleep(1)
     print("Witaj!")
     time.sleep(1)
-    print(u"\nZagrajmy w grÍ.")
+    print(u"\nZagrajmy w grƒô.")
     time.sleep(2)
-    print(u"Ja pokazujÍ Ci ciπg liter, a Ty prÛbujesz u≥oøyÊ z nich s≥owo.")
+    print(u"Ja pokazujƒô Ci ciƒÖg liter, a Ty pr√≥bujesz u≈Ço≈ºyƒá z nich s≈Çowo.")
     time.sleep(2)
-    print(u"Za kaøde dobrze odgadniÍte s≥owo otrzymujesz jeden punkt.\nMasz piÍÊ szans na odgadniÍcie jednego s≥owa, w przeciwnym razie nie otrzymasz punktu.")
+    print(u"Za ka≈ºde dobrze odgadniƒôte s≈Çowo otrzymujesz jeden punkt.\nMasz piƒôƒá szans na odgadniƒôcie jednego s≈Çowa, w przeciwnym razie nie otrzymasz punktu.")
     time.sleep(2)
-    print(u"Jesteú gotowy?")
+    print(u"Jeste≈õ gotowy?")
     time.sleep(2)
-    print(u"Aby rozpoczπÊ grÍ, wciúnij dowolny klawisz.")
-    print(u"Aby siÍ poddaÊ lub zrezygnowaÊ, wciúnij q.")
+    print(u"Aby rozpoczƒÖƒá grƒô, wci≈õnij dowolny klawisz.")
+    print(u"Aby siƒô poddaƒá lub zrezygnowaƒá, wci≈õnij q.")
     key = input(u"Twoja decyzja: ")
     if key.lower() == 'q':
         end_game()
@@ -38,17 +38,17 @@ def end_game():
     """ koniec gry + podsumowanie """
     time.sleep(1)
     os.system('cls')
-    print(u"\nGra zosta≥a zakoÒczona.")
-    print(u"Liczba wszystkich s≥Ûw do odgadniÍcia: " + str(amount))
-    print(u"Liczba zdobytych punktÛw: " + str(points))
-    print(u"DziÍkujemy za udzia≥ w grze.")
-    input("Aby wyjúÊ z programu, wciúnij Enter.")
+    print(u"\nGra zosta≈Ça zako≈Ñczona.")
+    print(u"Liczba wszystkich s≈Ç√≥w do odgadniƒôcia: " + str(amount))
+    print(u"Liczba zdobytych punkt√≥w: " + str(points))
+    print(u"Dziƒôkujemy za udzia≈Ç w grze.")
+    input("Aby wyj≈õƒá z programu, wci≈õnij Enter.")
 
 
 def next_exmpl():
-    """ przejúcie do nastÍpnego przyk≥adu + bieøπce podsumowanie """
-    print(u"\nCzy przejúÊ do nastÍpnego przyk≥adu? Jeúli tak, wciúnij dowolny klawisz. Jeúli chcesz zakoÒczyÊ grÍ, wciúnij q.")
-    print(u"Liczba wszystkich s≥Ûw do odgadniÍcia: " + str(amount))
+    """ przej≈õcie do nastƒôpnego przyk≈Çadu + bie≈ºƒÖce podsumowanie """
+    print(u"\nCzy przej≈õƒá do nastƒôpnego przyk≈Çadu? Je≈õli tak, wci≈õnij dowolny klawisz. Je≈õli chcesz zako≈Ñczyƒá grƒô, wci≈õnij q.")
+    print(u"Liczba wszystkich s≈Ç√≥w do odgadniƒôcia: " + str(amount))
     print(u"Dotychczas zdobyte punkty: " + str(points))
     key = input()
     if key.lower() == 'q':
@@ -57,17 +57,17 @@ def next_exmpl():
 
 
 def bad_answer(used_guess):
-    """ podanie z≥ej odpowiedzi + sprawdzenie """
-    print(u"\aNiestety, ale to b≥Ídna odpowiedü. SprÛbuj jeszcze raz!")
-    answer = input(u"Zgadnij, co to za s≥owo: ")
+    """ podanie z≈Çej odpowiedzi + sprawdzenie """
+    print(u"\aNiestety, ale to b≈Çƒôdna odpowied≈∫. Spr√≥buj jeszcze raz!")
+    answer = input(u"Zgadnij, co to za s≈Çowo: ")
     while answer in used_guess:
-        print(u"Juø podawa≥eú tÍ literÍ. Podaj innπ.")
-        answer = input("Podaj literÍ: ")
+        print(u"Ju≈º podawa≈Çe≈õ tƒô literƒô. Podaj innƒÖ.")
+        answer = input("Podaj literƒô: ")
     return answer
 
 
 def new_word(word):
-    """ tworzenie anagramu z wylosowanego s≥owa z puli """
+    """ tworzenie anagramu z wylosowanego s≈Çowa z puli """
     anagram = ""
     while word:
         pos = random.randrange(len(word))
@@ -79,7 +79,7 @@ def new_word(word):
 
 def brawo(correct):
     global points
-    print(u"\nBRAWO! To w≥aúnie s≥owo '" + str(correct.upper()) + "'.")
+    print(u"\nBRAWO! To w≈Ça≈õnie s≈Çowo '" + str(correct.upper()) + "'.")
     points += 1
     key = next_exmpl()
     os.system('cls')
@@ -89,16 +89,16 @@ def brawo(correct):
 def main():
     key = begin()
     while key.lower() != 'q':
-        if len(used_words) == len(WORDS): # wszystkie s≥owa z puli sa w liúcie wykorzystanych
+        if len(used_words) == len(WORDS): # wszystkie s≈Çowa z puli sa w li≈õcie wykorzystanych
             time.sleep(1)
-            print(u"\aWyglπda na to, øe zaprezentowaliúmy Ci wszystkie s≥owa z naszej puli.")
+            print(u"\aWyglƒÖda na to, ≈ºe zaprezentowali≈õmy Ci wszystkie s≈Çowa z naszej puli.")
             time.sleep(1)
             end_game()
             break
         used_guess = []
         os.system('cls')
         time.sleep(1)
-        print(u"\nZgadnij, co to za s≥owo: \n")
+        print(u"\nZgadnij, co to za s≈Çowo: \n")
         while True:
             word = random.choice(WORDS)
             if word in used_words:
@@ -106,9 +106,9 @@ def main():
             else:
                 used_words.append(word)
                 break
-        correct = word # przechwycenie s≥owa przed zmianπ go w anagram
+        correct = word # przechwycenie s≈Çowa przed zmianƒÖ go w anagram
         new_word(word)
-        answer = input(u"\nJakie to s≥owo?\n  ")
+        answer = input(u"\nJakie to s≈Çowo?\n  ")
         used_guess.append(answer)
         global amount
         amount += 1
@@ -125,8 +125,8 @@ def main():
                     key = brawo(correct)
                     break
                 if tries == 5:
-                    print(u"\aNiestety nie zgad≥eú! To s≥owo to '" + str(correct.upper()) + "'.")
-                    print(u"Nie otrzymujesz punktu za to s≥owo.")
+                    print(u"\aNiestety nie zgad≈Çe≈õ! To s≈Çowo to '" + str(correct.upper()) + "'.")
+                    print(u"Nie otrzymujesz punktu za to s≈Çowo.")
                     key = next_exmpl()
                     os.system('cls')
                     break
