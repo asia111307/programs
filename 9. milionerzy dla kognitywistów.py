@@ -1,16 +1,17 @@
-# -*- coding: cp1250 -*-
+# -*- coding: utf-8 -*-
 # milionerzy
 import os
 import random
 import pickle
 import sys
 import time
-from colorama import init, Fore, Back, Style
+from colorama import init, Fore
 init()
 
 
-used_questions = []  # zbiór wykorzystanych ju¿ pytañ
-# ko³a ratunkowe dostêpne
+
+used_questions = []  # zbiÃ³r wykorzystanych juÅ¼ pytaÅ„
+# koÅ‚a ratunkowe dostÄ™pne
 P = 1
 H = 1
 T = 1
@@ -29,11 +30,11 @@ def greetings():
     time.sleep(2)
     print(Fore.RESET + "\n\n\t\t\tWitamy w " + Fore.CYAN + "Milionerach!" + Fore.RESET)
     time.sleep(1)
-    print(" To wydanie specjalne, poniewa¿ jest przeznaczone dla kognitywistów.")
+    print(" To wydanie specjalne, poniewaÅ¼ jest przeznaczone dla kognitywistÃ³w.")
     time.sleep(2)
-    print(" Czy jesteœ gotowy, by zmierzyæ siê z pytaniami i zawalczyæ o milion z³otych?")
+    print(" Czy jesteÅ› gotowy, by zmierzyÄ‡ siÄ™ z pytaniami i zawalczyÄ‡ o milion zÅ‚otych?")
     time.sleep(2)
-    print(" Jeœli tak, wciœnij Enter. Jeœli nie chcesz rozpoczynaæ gry, wciœnij Q.")
+    print(" JeÅ›li tak, wciÅ›nij Enter. JeÅ›li nie chcesz rozpoczynaÄ‡ gry, wciÅ›nij Q.")
     key = input()
     if key.lower() == 'q':
         end_game()
@@ -42,57 +43,58 @@ def greetings():
 
 def user_name():
     time.sleep(1)
-    name = input(" Podaj swoje imiê: ")
-    print(" Zatem czas zaczynaæ grê, " + Fore.CYAN + str(name.capitalize()) + Fore.RESET + "!")
+    name = input(" Podaj swoje imiÄ™: ")
+    print(" Zatem czas zaczynaÄ‡ grÄ™, " + Fore.CYAN + str(name.capitalize()) + Fore.RESET + "!")
     return name
 
 
 def instructions():
     """ instrukcja """
     time.sleep(1)
-    print("\n Przedstawiê Ci teraz zasady gry.")
+    print("\n PrzedstawiÄ™ Ci teraz zasady gry.")
     time.sleep(2)
-    print("\n Aby zostaæ Milionerem, musisz odpowiedzieæ na " + Fore.CYAN + "12" + Fore.RESET + " pytañ. Ka¿de jest warte okreœlon¹ kwotê pieniêdzy.")
+    print("\n Aby zostaÄ‡ Milionerem, musisz odpowiedzieÄ‡ na " + Fore.CYAN + "12" + Fore.RESET + " pytaÅ„. KaÅ¼de jest warte okreÅ›lonÄ… kwotÄ™ pieniÄ™dzy.")
     time.sleep(3)
-    print(" Pytania o numerach " + Fore.CYAN + "2" + Fore.RESET + " i " + Fore.CYAN + "7" + Fore.RESET +  " to pytania, na które odpowiedŸ daje Ci sumê gwarantowan¹.\n")
+    print(" Pytania o numerach " + Fore.CYAN + "2" + Fore.RESET + " i " + Fore.CYAN + "7" + Fore.RESET +  " to pytania, na ktÃ³re odpowiedÅº daje Ci sumÄ™ gwarantowanÄ….\n")
     time.sleep(3)
-    print("""    <  12   1 000 000 z³ >""")
-    print(Fore.CYAN + """    <  11   500 000 z³ >
-    <  10   250 000 z³ >
-     <  9   125 000 z³ >
-     <  8   75 000 z³ >""")
-    print(Fore.RESET +"""     <  7   40 000 z³ >""")
-    print(Fore.CYAN +"""     <  6   20 000 z³ >
-     <  5   10 000 z³ >
-     <  4   5 000 z³ >
-     <  3   2 000 z³ >""")
-    print(Fore.RESET +"""     <  2   1 000 z³ >""")
-    print(Fore.CYAN +"""     <  1   500 z³ >""")
+    print("""    <  12   1 000 000 zÅ‚ >""")
+    print(Fore.CYAN + """    <  11   500 000 zÅ‚ >
+    <  10   250 000 zÅ‚ >
+     <  9   125 000 zÅ‚ >
+     <  8   75 000 zÅ‚ >""")
+    print(Fore.RESET +"""     <  7   40 000 zÅ‚ >""")
+    print(Fore.CYAN +"""     <  6   20 000 zÅ‚ >
+     <  5   10 000 zÅ‚ >
+     <  4   5 000 zÅ‚ >
+     <  3   2 000 zÅ‚ >""")
+    print(Fore.RESET +"""     <  2   1 000 zÅ‚ >""")
+    print(Fore.CYAN +"""     <  1   500 zÅ‚ >""")
     time.sleep(3)
-    print(Fore.RESET +"\n Do ka¿dego pytania otrzymasz " +Fore.CYAN + "4 warianty odpowiedzi" + Fore.RESET + ", ale tylko " + Fore.CYAN + "jedna" + Fore.RESET + " z nich jest poprawna.")
+    print(Fore.RESET +"\n Do kaÅ¼dego pytania otrzymasz " +Fore.CYAN + "4 warianty odpowiedzi" + Fore.RESET + ", ale tylko " + Fore.CYAN + "jedna" + Fore.RESET + " z nich jest poprawna.")
     time.sleep(2)
-    print("\n W dowolnym momencie programu mo¿esz siê wycofaæ (wciskaj¹c klawisz " + Fore.CYAN + "Q" + Fore.RESET + ") i zatrzymaæ dotychczas zdobyte pieni¹dze.")
+    print("\n W dowolnym momencie programu moÅ¼esz siÄ™ wycofaÄ‡ (wciskajÄ…c klawisz " + Fore.CYAN + "Q" + Fore.RESET + ") i zatrzymaÄ‡ dotychczas zdobyte pieniÄ…dze.")
     time.sleep(3)
-    print("\n Do dyspozycji masz " + Fore.CYAN + "3 ko³a ratunkowe" + Fore.RESET + ": \n Pytanie do publicznoœci (klawisz " + Fore.CYAN + "P" + Fore.RESET + "), \n Pó³ na pó³ (" + Fore.CYAN + "H"  + Fore.RESET + ") \n oraz Telefon do przyjaciela (" + Fore.CYAN + "T" + Fore.RESET + ").")
+    print("\n Do dyspozycji masz " + Fore.CYAN + "3 koÅ‚a ratunkowe" + Fore.RESET + ": \n Pytanie do publicznoÅ›ci (klawisz " + Fore.CYAN + "P" + Fore.RESET + "), \n PÃ³Å‚ na pÃ³Å‚ (" + Fore.CYAN + "H"  + Fore.RESET + ") \n oraz Telefon do przyjaciela (" + Fore.CYAN + "T" + Fore.RESET + ").")
     time.sleep(4)
-    print("\n\n Chyba ju¿ wszystko wiesz. Rozpoczynamy walkê o milion z³otych!")
-    time.sleep(3)
+    print("\n\n Chyba juÅ¼ wszystko wiesz. Rozpoczynamy walkÄ™ o milion zÅ‚otych!")
+    time.sleep(1)
 
 
 def open_quest_pack(file, r):
-    """ otwarcie zwenêtrznego pliku z baz¹ pytañ """
+    """ otwarcie zwenÄ™trznego pliku z bazÄ… pytaÅ„ """
     try:
         quest_file = open(file, r)
         quest_pack = pickle.load(quest_file)
         return quest_pack
     except (IOError, TypeError):
         time.sleep(1)
-        print("\n\a Niestety coœ posz³o nie tak... Niestety musimy zakoñczyæ program.")
+        print("\n\a CoÅ› poszÅ‚o nie tak... Niestety musimy zakoÅ„czyÄ‡ program.")
+        input()
         time.sleep(1)
 
 
 def question_choice(quest_pack):
-    """ losowanie pytania i wyodrêbnienie jest sk³adowych """
+    """ losowanie pytania i wyodrÄ™bnienie jest skÅ‚adowych """
     while True:
         quest_box = random.choice(quest_pack)
         if quest_box in used_questions:
@@ -107,7 +109,7 @@ def question_choice(quest_pack):
 
 
 def display_quest(question, answers):
-    """ wyœwietla wylosowane pytanie """
+    """ wyÅ›wietla wylosowane pytanie """
     time.sleep(1)
     print("\n Oto pytanie:\n\n")
     time.sleep(2)
@@ -117,24 +119,24 @@ def display_quest(question, answers):
         print(" " + str(i))
         time.sleep(1)
     time.sleep(1)
-    print("\n\n Pamiêtaj, ¿e w ka¿dym momencie gry mo¿esz siê wycofaæ (Q) lub skorzystaæ z kó³ ratunkowych (P, H, T).")
+    print("\n\n PamiÄ™taj, Å¼e w kaÅ¼dym momencie gry moÅ¼esz siÄ™ wycofaÄ‡ (Q) lub skorzystaÄ‡ z kÃ³Å‚ ratunkowych (P, H, T).")
 
 
 def p(name):
-    """ ko³o ratunkowe Publicznoœæ """
+    """ koÅ‚o ratunkowe PublicznoÅ›Ä‡ """
     global P
     if P == 0:
-        print("\n\a Niestety, to ko³o ratunkowe zosta³o przez Ciebie ju¿ wykorzystane.")
+        print("\n\a Niestety, to koÅ‚o ratunkowe zostaÅ‚o przez Ciebie juÅ¼ wykorzystane.")
     else:
         P = 0
         time.sleep(1)
-        print("\n\n A wiêc prosimy o pomoc Publicznoœæ w studiu!")
+        print("\n\n A wiÄ™c prosimy o pomoc PublicznoÅ›Ä‡ w studiu!")
         time.sleep(3)
         a = int(random.randrange(100))
         b = int(random.randrange((100-a)))
         c = int(random.randrange((100-a-b)))
         d = int(100-a-b-c)
-        print("\n\n G³osy publicznoœci rozk³adaj¹ siê nastêpuj¹co:\n")
+        print("\n\n GÅ‚osy publicznoÅ›ci rozkÅ‚adajÄ… siÄ™ nastÄ™pujÄ…co:\n")
         print(" A:  " + str(a) + " %")
         print(" B:  " + str(b) + " %")
         print(" C:  " + str(c) + " %")
@@ -144,18 +146,18 @@ def p(name):
 
 
 def h(correct, answers, name):
-    """ ko³o ratunkowe Pó³ na pó³ """
+    """ koÅ‚o ratunkowe PÃ³Å‚ na pÃ³Å‚ """
     global H
-    half_answ = []  # to sie wyœwietli po odrzuceniu dwóch b³êdnych odpowiedzi
+    half_answ = []  # to sie wyÅ›wietli po odrzuceniu dwÃ³ch bÅ‚Ä™dnych odpowiedzi
     if H == 0:
-        print("\a\n Niestety, to ko³o ratunkowe zosta³o przez Ciebie ju¿ wykorzystane.")
+        print("\a\n Niestety, to koÅ‚o ratunkowe zostaÅ‚o przez Ciebie juÅ¼ wykorzystane.")
     else:
         H = 0
         time.sleep(2)
-        print("\n\n Wybra³eœ Pó³ na pó³. Prosimy komputer o odrzucenie losowo dwóch b³êdnych odpowiedzi:\n\n")
+        print("\n\n WybraÅ‚eÅ› PÃ³Å‚ na pÃ³Å‚. Prosimy komputer o odrzucenie losowo dwÃ³ch bÅ‚Ä™dnych odpowiedzi:\n\n")
         time.sleep(3)
         ans_num = 0
-        if correct == 'a': # przypisanie liczby do odpowiedzi (do tej pory mia³y literki)
+        if correct == 'a': # przypisanie liczby do odpowiedzi (do tej pory miaÅ‚y literki)
             ans_num = 0
         elif correct == 'b':
             ans_num = 1
@@ -163,8 +165,8 @@ def h(correct, answers, name):
             ans_num = 2
         elif correct == 'd':
             ans_num = 3
-        half_answ.append(answers[ans_num]) # dodanie do listy prawid³owej odpowiedzi
-        while True:  # losowanie drugiej odpowiedzi, która siê wyœwietli
+        half_answ.append(answers[ans_num]) # dodanie do listy prawidÅ‚owej odpowiedzi
+        while True:  # losowanie drugiej odpowiedzi, ktÃ³ra siÄ™ wyÅ›wietli
             second_num = random.choice(answers)
             if second_num == answers[ans_num]:
                 continue
@@ -180,33 +182,33 @@ def h(correct, answers, name):
 
 
 def t(name, correct, i, half_answers):
-    """ ko³o ratunkowe Telefon do przyjaciela"""
+    """ koÅ‚o ratunkowe Telefon do przyjaciela"""
     global T
     if T == 0:
-        print("\n\a Niestety, to ko³o ratunkowe zosta³o przez Ciebie ju¿ wykorzystane.")
+        print("\n\a Niestety, to koÅ‚o ratunkowe zostaÅ‚o przez Ciebie juÅ¼ wykorzystane.")
     else:
         T = 0
         time.sleep(1)
-        print("\n\n Wybra³eœ Telefon do przyjaciela. Zatem dzwonimy!")
+        print("\n\n WybraÅ‚eÅ› Telefon do przyjaciela. Zatem dzwonimy!")
         time.sleep(3)
-        NAMES = ('Darek', 'Kaziu', 'Ireneusz', 'Anastazja', 'Gra¿yna', 'Janusz', 'Monika', 'Halina', 'Agnieszka', 'Brajan', 'Karina', 'D¿esika', 'Marek')
+        NAMES = ('Darek', 'Kaziu', 'Ireneusz', 'Anastazja', 'GraÅ¼yna', 'Janusz', 'Monika', 'Halina', 'Agnieszka', 'Brajan', 'Karina', 'DÅ¼esika', 'Marek')
         random_name = random.choice(NAMES)
         KNOWS = ('know', 'not_know')
-        print("\n\n Witaj, " + str(random_name) + "! " + str(name.capitalize()) + " gra w³aœnie o " + str(MONEY[i]) + " z³ i potrzebuje Twojej pomocy.")
+        print("\n\n Witaj, " + str(random_name) + "! " + str(name.capitalize()) + " gra wÅ‚aÅ›nie o " + str(MONEY[i]) + " zÅ‚ i potrzebuje Twojej pomocy.")
         time.sleep(3)
-        print(" Znasz ju¿ pytanie. Oczekujemy na Twoj¹ odpowiedŸ!\n")
+        print(" Znasz juÅ¼ pytanie. Oczekujemy na TwojÄ… odpowiedÅº!\n")
         time.sleep(3)
-        print(" " + random_name.upper() + str(": Dobrze, postaram siê pomóc."))
+        print(" " + random_name.upper() + str(": Dobrze, postaram siÄ™ pomÃ³c."))
         time.sleep(3)
         print(" " + random_name.upper() + str(": Hmmm..."))
         time.sleep(4)
         know = random.choice(KNOWS)
         if know == 'know':
-            texts = (": Chyba znam poprawn¹ odpowiedŸ na to pytanie. Wed³ug mnie jest to odpowiedŸ ", ": Na szczêœcie wiem, jak Ci pomóc. Prawid³owa odpowiedŸ to ", ": Ha! To akurat pamiêtam ze studiów! To na pewno ", ": To by³ jeden z niewielu wyk³adów, które pamiêtam. OdpowiedŸ to ")
+            texts = (": Chyba znam poprawnÄ… odpowiedÅº na to pytanie. WedÅ‚ug mnie jest to odpowiedÅº ", ": Na szczÄ™Å›cie wiem, jak Ci pomÃ³c. PrawidÅ‚owa odpowiedÅº to ", ": Ha! To akurat pamiÄ™tam ze studiÃ³w! To na pewno ", ": To byÅ‚ jeden z niewielu wykÅ‚adÃ³w, ktÃ³re pamiÄ™tam. OdpowiedÅº to ")
             print(" " + str(random_name.upper()) + str(random.choice(texts)) + str(correct.upper()) + ".")
         elif know == 'not_know':
             rand_group = ('A', 'B', 'C', 'D')
-            texts = (": Nie mam pewnoœci co do odpowiedzi na to pytanie. Obstawiam odpowiedŸ ", ": Kurczê, wybacz mi, ale nie pamiêtam tego dok³adnie. Ale coœ kojarzê, ¿e to bêdzie ", ": Fuck! Akurat na tych zajêciach mnie nie by³o. Ale mo¿e zaznacz ", ": Wstyd siê przyznaæ, ale nie mam pewnoœci. Ale raczej odpowiedŸ to ")
+            texts = (": Nie mam pewnoÅ›ci co do odpowiedzi na to pytanie. Obstawiam odpowiedÅº ", ": KurczÄ™, wybacz mi, ale nie pamiÄ™tam tego dokÅ‚adnie. Ale coÅ› kojarzÄ™, Å¼e to bÄ™dzie ", ": Fuck! Akurat na tych zajÄ™ciach mnie nie byÅ‚o. Ale moÅ¼e zaznacz ", ": Wstyd siÄ™ przyznaÄ‡, ale nie mam pewnoÅ›ci. Ale raczej odpowiedÅº to ")
             print(" " + str(random_name.upper()) + str(random.choice(texts)) + str(random.choice(rand_group)) + ".")
         time.sleep(3)
         print("\n\n Dobrze. Jaka jest Twoja decyzja, " + str(name.capitalize()) + "?")
@@ -217,7 +219,7 @@ def interpret_answer(correct, i, answers, good_answers, name):
     while True:
         key = input(" Twoja decyzja: ")
         if key.lower() not in ('a', 'b', 'c', 'd', 'p', 'h', 't', 'q'):
-            print("\n\a Nie rozumiem tego polecenia. Powtórz, proszê.")
+            print("\n\a Nie rozumiem tego polecenia. PowtÃ³rz, proszÄ™.")
             continue
         if key.lower() == 'p':
             p(name)
@@ -231,34 +233,38 @@ def interpret_answer(correct, i, answers, good_answers, name):
         if key.lower() == correct:
             if good_answers == 11:
                 time.sleep(2)
-                print("\n TAK! TAK! TAK! To by³a prawid³owa odpowedŸ! Wygra³eœ " + Fore.CYAN + "MILION" + Fore.RESET + " z³otych!")
+                print("\n TAK! TAK! TAK! To byÅ‚a prawidÅ‚owa odpowedÅº! WygraÅ‚eÅ› " + Fore.CYAN + "MILION" + Fore.RESET + " zÅ‚otych!")
                 time.sleep(4)
                 good_answers += 1
                 sum_up(good_answers)
                 break
             else:
                 time.sleep(2)
-                print("\n\n BRAWO! To jest poprawna odpowiedŸ!")
+                print("\n\n BRAWO! To jest poprawna odpowiedÅº!")
                 time.sleep(1)
-                print("\n Wygrywasz " + Fore.CYAN + str(MONEY[i]) + Fore.RESET + " z³!\n")
+                print("\n Wygrywasz " + Fore.CYAN + str(MONEY[i]) + Fore.RESET + " zÅ‚!\n")
                 time.sleep(2)
-                print(" Aby przejœæ do nastêpnego pytania, wciœnij Enter.")
+                print(" Aby przejÅ›Ä‡ do nastÄ™pnego pytania, wciÅ›nij Enter.")
                 good_answers += 1
                 input()
                 break
         if key != correct and key not in ('q', 't', 'p', 'h'):
             time.sleep(2)
-            print("\n\n\a Niestety, ale to niepoprawna odpowiedŸ.")
+            print("\n\n\a Niestety, ale to niepoprawna odpowiedÅº.")
             time.sleep(1)
-            print("\n Prawid³owa odpowiedŸ to: " + str(correct.upper()))
+            print("\n PrawidÅ‚owa odpowiedÅº to: " + str(correct.upper()))
             time.sleep(2)
             sum_up(good_answers)
             break
         if key.lower() == 'q':
             time.sleep(1)
-            print("\n Szkoda, ¿e zdecydowa³es siê zrezygnowaæ z dalszej gry! Ale szanujê Twoj¹ decyzjê.")
+            print("\n Szkoda, Å¼e zdecydowaÅ‚es siÄ™ zrezygnowaÄ‡ z dalszej gry! Ale szanujÄ™ TwojÄ… decyzjÄ™.")
             time.sleep(2)
-            print("\n Wygra³eœ w Milionerach " + Fore.CYAN + str(MONEY[good_answers - 1]) + Fore.RESET + " z³. Na pewno przyda siê to na projekty badawcze!")
+            if good_answers == 0:
+                print("\n WygraÅ‚eÅ› w Milionerach 0 zÅ‚!")
+            else:
+                print("\n WygraÅ‚eÅ› w Milionerach " + Fore.CYAN + str(MONEY[good_answers - 1]) + Fore.RESET + " zÅ‚. Na pewno przyda siÄ™ to na projekty badawcze!")
+            time.sleep(2)
             end_game()
             break
     return good_answers
@@ -272,7 +278,7 @@ def sum_up(good_answers):
     while True:
         if good_answers < 2:
             prize = MONEY_SAFE[0]
-            print("\n Niestety tym razem nie uda³o siê nic wygraæ.")
+            print("\n Niestety tym razem nie udaÅ‚o siÄ™ nic wygraÄ‡.")
             break
         elif good_answers >= 2 and good_answers < 7 :
             prize = MONEY_SAFE[1]
@@ -280,7 +286,7 @@ def sum_up(good_answers):
             prize = MONEY_SAFE[2]
         elif good_answers == 12:
             prize = MONEY_SAFE[3]
-        print("\n Wygra³eœ w naszej grze " + Fore.CYAN + str(prize) + Fore.RESET + " z³! Na pewno przyda siê to na projekty badawcze.")
+        print("\n WygraÅ‚eÅ› w naszej grze " + Fore.CYAN + str(prize) + Fore.RESET + " zÅ‚! Na pewno przyda siÄ™ to na projekty badawcze.")
         break
     time.sleep(4)
     end_game()
@@ -289,7 +295,7 @@ def sum_up(good_answers):
 def end_game():
     """ koniec gry + podsumowanie """
     time.sleep(1)
-    print("\n Do zobaczenia nastêpnym razem!")
+    print("\n Do zobaczenia nastÄ™pnym razem!")
     time.sleep(2)
     input()
     sys.exit()
@@ -300,7 +306,7 @@ def main():
     while key.lower() != 'q':
         name = user_name()
         instructions()
-        input()
+        input("(WciÅ›nij Enter)")
         quest_pack = open_quest_pack("questions.dat", "rb")
         good_answers = 0
         while good_answers != 12:
@@ -308,7 +314,7 @@ def main():
                 question, answers, correct = question_choice(quest_pack)
                 os.system('cls')
                 time.sleep(1)
-                print("\n\n Gramy o " + Fore.CYAN + str(MONEY[i]) + Fore.RESET + " z³.")
+                print("\n\n Gramy o " + Fore.CYAN + str(MONEY[i]) + Fore.RESET + " zÅ‚.")
                 display_quest(question, answers)
                 time.sleep(2)
                 good_answers = interpret_answer(correct, i, answers, good_answers, name)
