@@ -33,16 +33,16 @@ def greetings():
     time.sleep(2)
     print(" Czy jesteś gotowy, by zmierzyć się z pytaniami i zawalczyć o milion złotych?")
     time.sleep(2)
-    print(" Jeśli tak, wciśnij Enter. Jeśli nie chcesz rozpoczynać gry, wciśnij Q.")
-    key = input()
+    key = input(" Jeśli tak, wciśnij Enter. Jeśli nie chcesz rozpoczynać gry, wciśnij Q.\n")
     if key.lower() == 'q':
-        end_game()
+        end_game(name='Unknown', prize=0)
     return key
 
 
 def user_name():
+    """ pobranie imienia od gracza """
     time.sleep(1)
-    name = input(" Podaj swoje imię: ")
+    name = input("\n Podaj swoje imię: ")
     print(" Zatem czas zaczynać grę, " + Fore.CYAN + str(name.capitalize()) + Fore.RESET + "!")
     return name
 
@@ -121,33 +121,49 @@ def display_quest(question, answers):
     print("\n\n Pamiętaj, że w każdym momencie gry możesz się wycofać (Q) lub skorzystać z kół ratunkowych (P, H, T).")
 
 
-def p(name):
+def p(correct, name):
     """ koło ratunkowe Publiczność """
     global P
     if P == 0:
         print("\n\a Niestety, to koło ratunkowe zostało przez Ciebie już wykorzystane.")
     else:
+        KNOWS = ('know', 'not_know', 'know') # Publiczność może, ale nie musi zasugerować dobrą odpowiedź - ale raczej zna
+        know = random.choice(KNOWS)
         P = 0
         time.sleep(1)
         print("\n\n A więc prosimy o pomoc Publiczność w studiu!")
         time.sleep(3)
-        a = int(random.randrange(100))
-        b = int(random.randrange((100-a)))
-        c = int(random.randrange((100-a-b)))
-        d = int(100-a-b-c)
         print("\n\n Głosy publiczności rozkładają się następująco:\n")
-        print(" A:  " + str(a) + " %")
-        print(" B:  " + str(b) + " %")
-        print(" C:  " + str(c) + " %")
-        print(" D:  " + str(d) + " %")
-    time.sleep(3)
-    print("\n\n Dobrze, " + str(name.capitalize()) + ". Jaka jest Twoja decyzja? ")
+        if know == 'know':
+            answrs = ('A', 'B', 'C', 'D')
+            corr_percent = int(random.randint(51,99))
+            b = int(random.randrange((100 - corr_percent)))
+            c = int(random.randrange((100 - corr_percent - b)))
+            d = int(100 - corr_percent - b - c)
+            possibles = [b,c,d]
+            for i in answrs:
+                if i == correct.upper():
+                    print(" " + str(i) + ":  " + str(corr_percent) + " %")
+                else:
+                    x = random.choice(possibles)
+                    print(" " + str(i) + ":  " + str(x) + " %")
+                    possibles.remove(x)
+        if know == 'not_know':
+            a = int(random.randrange(100))
+            b = int(random.randrange((100-a)))
+            c = int(random.randrange((100-a-b)))
+            d = int(100-a-b-c)
+            print(" A:  " + str(a) + " %")
+            print(" B:  " + str(b) + " %")
+            print(" C:  " + str(c) + " %")
+            print(" D:  " + str(d) + " %")
+        time.sleep(3)
+        print("\n\n Dobrze, " + str(name.capitalize()) + ". Jaka jest Twoja decyzja? ")
 
 
 def h(correct, answers, name):
     """ koło ratunkowe Pół na pół """
     global H
-    half_answ = []  # to sie wyświetli po odrzuceniu dwóch błędnych odpowiedzi
     if H == 0:
         print("\a\n Niestety, to koło ratunkowe zostało przez Ciebie już wykorzystane.")
     else:
@@ -164,6 +180,7 @@ def h(correct, answers, name):
             ans_num = 2
         elif correct == 'd':
             ans_num = 3
+        half_answ = []  # to sie wyświetli po odrzuceniu dwóch błędnych odpowiedzi
         half_answ.append(answers[ans_num]) # dodanie do listy prawidłowej odpowiedzi
         while True:  # losowanie drugiej odpowiedzi, która się wyświetli
             second_num = random.choice(answers)
@@ -176,11 +193,11 @@ def h(correct, answers, name):
         for i in half_answ:
             print(" " + str(i))
         time.sleep(1)
-        print("\n\n Dobrze, " + str(name.capitalize()) + ".Jaka jest Twoja decyzja? ")
-    return half_answ
+        print("\n\n Dobrze, " + str(name.capitalize()) + ". Jaka jest Twoja decyzja? ")
+        return half_answ
 
 
-def t(name, correct, i, half_answers):
+def t(name, correct, i):
     """ koło ratunkowe Telefon do przyjaciela"""
     global T
     if T == 0:
@@ -192,7 +209,7 @@ def t(name, correct, i, half_answers):
         time.sleep(3)
         NAMES = ('Darek', 'Kaziu', 'Ireneusz', 'Anastazja', 'Grażyna', 'Janusz', 'Monika', 'Halina', 'Agnieszka', 'Brajan', 'Karina', 'Dżesika', 'Marek')
         random_name = random.choice(NAMES)
-        KNOWS = ('know', 'not_know')
+        KNOWS = ('know', 'not_know') # przyjaciel może znać odpowiedź lub jej nie znać
         print("\n\n Witaj, " + str(random_name) + "! " + str(name.capitalize()) + " gra właśnie o " + str(MONEY[i]) + " zł i potrzebuje Twojej pomocy.")
         time.sleep(3)
         print(" Znasz już pytanie. Oczekujemy na Twoją odpowiedź!\n")
@@ -206,36 +223,37 @@ def t(name, correct, i, half_answers):
             texts = (": Chyba znam poprawną odpowiedź na to pytanie. Według mnie jest to odpowiedź ", ": Na szczęście wiem, jak Ci pomóc. Prawidłowa odpowiedź to ", ": Ha! To akurat pamiętam ze studiów! To na pewno ", ": To był jeden z niewielu wykładów, które pamiętam. Odpowiedź to ")
             print(" " + str(random_name.upper()) + str(random.choice(texts)) + str(correct.upper()) + ".")
         elif know == 'not_know':
-            rand_group = ('A', 'B', 'C', 'D')
             texts = (": Nie mam pewności co do odpowiedzi na to pytanie. Obstawiam odpowiedź ", ": Kurczę, wybacz mi, ale nie pamiętam tego dokładnie. Ale coś kojarzę, że to będzie ", ": Fuck! Akurat na tych zajęciach mnie nie było. Ale może zaznacz ", ": Wstyd się przyznać, ale nie mam pewności. Ale raczej odpowiedź to ")
+            rand_group = ('A', 'B', 'C', 'D')
             print(" " + str(random_name.upper()) + str(random.choice(texts)) + str(random.choice(rand_group)) + ".")
         time.sleep(3)
         print("\n\n Dobrze. Jaka jest Twoja decyzja, " + str(name.capitalize()) + "?")
 
 
 def interpret_answer(correct, i, answers, good_answers, name):
-    """ interpretacja wpisanej odpowiedzi """
+    """ interpretacja wpisanej odpowiedzi - gracz może rezygnowac z gry w różnych momentach """
     while True:
         key = input(" Twoja decyzja: ")
         if key.lower() not in ('a', 'b', 'c', 'd', 'p', 'h', 't', 'q'):
             print("\n\a Nie rozumiem tego polecenia. Powtórz, proszę.")
             continue
         if key.lower() == 'p':
-            p(name)
+            p(correct, name)
             continue
         if key.lower() == 'h':
             h(correct, answers, name)
             continue
         if key.lower() == 't':
-            t(name, correct,i, answers)
+            t(name, correct, i)
             continue
         if key.lower() == correct:
             if good_answers == 11:
                 time.sleep(2)
-                print("\n TAK! TAK! TAK! To była prawidłowa odpowedź! Wygrałeś " + Fore.CYAN + "MILION" + Fore.RESET + " złotych!")
+                print("\n TAK! TAK! TAK! To była prawidłowa odpowiedź! Wygrałeś " + Fore.CYAN + "MILION" + Fore.RESET + " złotych!")
                 time.sleep(4)
                 good_answers += 1
                 sum_up(good_answers)
+                end_game(name, prize=1000000)
                 break
             else:
                 time.sleep(2)
@@ -245,7 +263,13 @@ def interpret_answer(correct, i, answers, good_answers, name):
                 time.sleep(2)
                 print(" Aby przejść do następnego pytania, wciśnij Enter.")
                 good_answers += 1
-                input()
+                key = input()
+                if key.lower() == 'q':
+                    time.sleep(1)
+                    print("\n Szkoda, że zdecydowałes się zrezygnować z dalszej gry! Ale szanuję Twoją decyzję.")
+                    time.sleep(1)
+                    print("Wygrałeś ") + str(MONEY[i]) + " zł!"
+                    end_game(name, prize=MONEY[i])
                 break
         if key != correct and key not in ('q', 't', 'p', 'h'):
             time.sleep(2)
@@ -253,7 +277,7 @@ def interpret_answer(correct, i, answers, good_answers, name):
             time.sleep(1)
             print("\n Prawidłowa odpowiedź to: " + str(correct.upper()))
             time.sleep(2)
-            sum_up(good_answers)
+            end_game(name, prize=sum_up(good_answers))
             break
         if key.lower() == 'q':
             time.sleep(1)
@@ -261,10 +285,12 @@ def interpret_answer(correct, i, answers, good_answers, name):
             time.sleep(2)
             if good_answers == 0:
                 print("\n Wygrałeś w Milionerach 0 zł!")
+                prize = 0
             else:
                 print("\n Wygrałeś w Milionerach " + Fore.CYAN + str(MONEY[good_answers - 1]) + Fore.RESET + " zł. Na pewno przyda się to na projekty badawcze!")
+                prize = MONEY[good_answers - 1]
             time.sleep(2)
-            end_game()
+            end_game(name, prize)
             break
     return good_answers
 
@@ -276,7 +302,6 @@ def sum_up(good_answers):
     prize = 0
     while True:
         if good_answers < 2:
-            prize = MONEY_SAFE[0]
             print("\n Niestety tym razem nie udało się nic wygrać.")
             break
         elif good_answers >= 2 and good_answers < 7 :
@@ -287,15 +312,18 @@ def sum_up(good_answers):
             prize = MONEY_SAFE[3]
         print("\n Wygrałeś w naszej grze " + Fore.CYAN + str(prize) + Fore.RESET + " zł! Na pewno przyda się to na projekty badawcze.")
         break
-    time.sleep(4)
-    end_game()
+    return prize
 
 
-def end_game():
-    """ koniec gry + podsumowanie """
+def end_game(name, prize):
+    """ koniec gry + podsumowanie i zapis wyniku do pliku """
     time.sleep(1)
     print("\n Do zobaczenia następnym razem!")
     time.sleep(2)
+    scores_file = open('scores.txt', 'a+')
+    x = str(name.capitalize()) + ": " + str(prize) + " zł\n"
+    scores_file.write(x)
+    scores_file.close()
     input()
     sys.exit()
 
